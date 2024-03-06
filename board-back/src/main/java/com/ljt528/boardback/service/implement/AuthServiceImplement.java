@@ -5,6 +5,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+<<<<<<< HEAD
 import com.ljt528.boardback.dto.request.auth.SignInRequestDto;
 import com.ljt528.boardback.dto.request.auth.SignUpRequestDto;
 import com.ljt528.boardback.dto.response.ResponseDto;
@@ -12,6 +13,12 @@ import com.ljt528.boardback.dto.response.auth.SignInResponseDto;
 import com.ljt528.boardback.dto.response.auth.SignUpResponseDto;
 import com.ljt528.boardback.entity.UserEntity;
 import com.ljt528.boardback.provider.JwTProvider;
+=======
+import com.ljt528.boardback.dto.request.auth.SignUpRequestDto;
+import com.ljt528.boardback.dto.response.ResponseDto;
+import com.ljt528.boardback.dto.response.auth.SignUpResponseDto;
+import com.ljt528.boardback.entity.UserEntity;
+>>>>>>> 1704d27f3f5d9a44a268d4645c71d8107709670d
 import com.ljt528.boardback.repository.UserRepository;
 import com.ljt528.boardback.service.AuthService;
 
@@ -25,7 +32,10 @@ public class AuthServiceImplement implements AuthService {
     // implement란? - 인터페이스의 구현체
 
     private final UserRepository userRepository;
+<<<<<<< HEAD
     private final JwTProvider jwtProvider;
+=======
+>>>>>>> 1704d27f3f5d9a44a268d4645c71d8107709670d
 
     private PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
@@ -58,7 +68,11 @@ public class AuthServiceImplement implements AuthService {
             // 데이터베이스에 저장
             UserEntity userEntity = new UserEntity(dto);
             userRepository.save(userEntity);
+<<<<<<< HEAD
 
+=======
+        
+>>>>>>> 1704d27f3f5d9a44a268d4645c71d8107709670d
         } catch (Exception exception) {
             exception.printStackTrace();
             return ResponseDto.databaseError();
@@ -68,6 +82,7 @@ public class AuthServiceImplement implements AuthService {
 
     }
 
+<<<<<<< HEAD
     @Override
     public ResponseEntity<? super SignInResponseDto> signIn(SignInRequestDto dto) {
         
@@ -97,3 +112,6 @@ public class AuthServiceImplement implements AuthService {
     }
     
 }
+=======
+}
+>>>>>>> 1704d27f3f5d9a44a268d4645c71d8107709670d
