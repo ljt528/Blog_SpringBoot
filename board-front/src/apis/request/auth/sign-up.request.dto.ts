@@ -1,5 +1,4 @@
 export default interface SignUpRequestDto {
-    // 필드 지정
     email: string;
     password: string;
     nickname: string;

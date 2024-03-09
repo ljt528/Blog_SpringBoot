@@ -19,7 +19,7 @@ export default function Authentication() {
         const passwordRef = useRef<HTMLInputElement | null>(null);
 
         //          state : 이메일 상태           //
-        const [email, setEmail] = useState<string>('');
+        const [email, setEmail] = useState<string>('')
 
         //          state : 패스워드 상태           //
         const [password, setPassword] = useState<string>('');
@@ -38,13 +38,12 @@ export default function Authentication() {
     //          event handler : 로그인 버튼 클릭 이벤트 처리           //
     const onSignInButtonClickHandler = () => {
 
-    };
-
-    //          event handler : 회원가입 링크 클릭 이벤트 처리           //
-    const onSignUpLinkClickHandler  = () => {
-      setView('sign-up');
     }
 
+    //          event handler : 패스워드 버튼 클릭 이벤트 처리           //
+    const onSignUpLinkClickHandler = () => {
+      setView('sign-up');
+    }
 
     //          event handler : 패스워드 버튼 클릭 이벤트 처리           //
     const onPasswordButtonClickHandler = () => {
@@ -64,13 +63,13 @@ export default function Authentication() {
       if (event.key !== 'Enter') return;
       if (!passwordRef.current) return;
       passwordRef.current.focus();
-    };
+    }
 
     //          event handler : 패스워드 인풋 키 다운 이벤트 처리           //
     const onPasswordKeyDownHandler = (event: KeyboardEvent<HTMLInputElement>) => {
       if (event.key !== 'Enter') return;
       onSignInButtonClickHandler();
-    };
+    }
     
     //        render : sign in card 컴포넌트 렌더링        //
     return (
@@ -93,7 +92,7 @@ export default function Authentication() {
             }
             <div className='black-large-full-button' onClick={onSignInButtonClickHandler}>{'로그인'}</div>
             <div className='auth-description-box'>
-              <div className='auth-description'>{'신규 사용자이신가요? '}<span className='auth-description-link' onClick={onSignUpLinkClickHandler}>{'회원가입'}</span></div>
+              <div className='auth-description'>{'신규 사용자이신가요? '}<span className='auth-description-link'onClick={onSignUpLinkClickHandler}>{'회원가입'}</span></div>
             </div>
           </div>
         </div>

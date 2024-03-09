@@ -22,7 +22,7 @@ export default function Footer() {
             <div className='footer-top'>
                 <div className='footer-logo-box'>
                     <div className='icon-box'>
-                        <div className='icon logo-ggomi-icon'></div>
+                        <div className='icon logo-chick-icon'></div>
                     </div>
                     <div className='footer-logo-text'>{'JunTae Blog'}</div>
                 </div>

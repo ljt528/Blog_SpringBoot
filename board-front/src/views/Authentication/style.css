@@ -3,7 +3,6 @@
     min-width: 1440px;
     /* 100vh - header 높이 - 위쪽 padding 높이 - 아래쪽 padding 높이 */
     height: calc(100vh - 68px - 100px - 150px);
-    /* 로그인 창 길이 */
     min-height: 960px;
 
     display: flex;
@@ -85,23 +84,24 @@
 
 .auth-card-box {
     height: 100%;
+
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 }
 
-.auth-card-top {
+.auth-card-top{
     display: flex;
     flex-direction: column;
     gap: 40px;
 }
 
-.auth-card-title-box {
+.auth-card-title-box{
     display: flex;
     justify-content: space-between;
 }
 
-.auth-card-title {
+.auth-card-title{
     color: rgba(0, 0, 0, 1);
 
     font-size: 24px;
@@ -109,17 +109,17 @@
     line-height: 140%;
 }
 
-.auth-card-bottom {
+.auth-card-bottom{
     display: flex;
     flex-direction: column;
     gap: 20px;
 }
 
-.auth-sign-in-error-box {
+.auth-sign-in-error-box{
     margin-bottom: -4px;
 }
 
-.auth-sign-in-error-message {
+.auth-sign-in-error-message{
     color: rgba(255, 0, 0, 0.7);
 
     font-size: 12px;
@@ -129,12 +129,12 @@
     white-space: pre-wrap;
 }
 
-.auth-description-box {
+.auth-description-box{
     display: flex;
     justify-content: center;
 }
 
-.auth-description {
+.auth-description{
     color: rgba(0, 0, 0, 0.7);
 
     font-size: 14px;
@@ -144,6 +144,6 @@
 
 .auth-description-link {
     color: rgba(0, 0, 0, 1);
-    font-weight: 600;
     cursor: pointer;
+    font-weight: 600;
 }
