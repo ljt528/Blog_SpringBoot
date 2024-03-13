@@ -11,7 +11,7 @@ import com.ljt528.boardback.dto.response.ResponseDto;
 import com.ljt528.boardback.dto.response.auth.SignInResponseDto;
 import com.ljt528.boardback.dto.response.auth.SignUpResponseDto;
 import com.ljt528.boardback.entity.UserEntity;
-import com.ljt528.boardback.provider.JwTProvider;
+import com.ljt528.boardback.provider.JwtProvider;
 import com.ljt528.boardback.repository.UserRepository;
 import com.ljt528.boardback.service.AuthService;
 
@@ -25,7 +25,7 @@ public class AuthServiceImplement implements AuthService {
     // implement란? - 인터페이스의 구현체
 
     private final UserRepository userRepository;
-    private final JwTProvider jwtProvider;
+    private final JwtProvider jwtProvider;
 
     private PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 

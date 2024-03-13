@@ -6,4 +6,4 @@ export default interface SignUpRequestDto {
     address: string;
     addressDetail:string | null;
     agreedPersonal: boolean;
-}
+};

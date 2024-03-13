@@ -15,7 +15,7 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
 
 @Component      // 의존성 주입 가능
-public class JwTProvider {
+public class JwtProvider {
     
     @Value("${secret-key}")
     private String secretKey;

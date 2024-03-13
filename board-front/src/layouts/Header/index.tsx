@@ -198,7 +198,7 @@ export default function Header() {
       <div className='header-container'>
         <div className='header-left-box' onClick={onLogoClickHandler}>
           <div className='icon-box'>
-            <div className='icon logo-judy-nick-icon'></div>
+            <div className='icon logo-chick-black-icon'></div>
           </div>
           <div className='header-logo'>{'JunTae Blog'}</div>
         </div>
