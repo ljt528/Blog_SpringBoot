@@ -1,6 +1,7 @@
 package com.ljt528.boardback.controller;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,6 +25,7 @@ public class AuthController {
     private final AuthService authService;
 
     @PostMapping("/sign-up")
+    @CrossOrigin(origins = "http://localhost:3000")
     public ResponseEntity<? super SignUpResponseDto> signUp(
         @RequestBody @Valid SignUpRequestDto requestBody
     ) {
