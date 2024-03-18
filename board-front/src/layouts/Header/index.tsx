@@ -132,6 +132,7 @@ export default function Header() {
     //      event handler : 로그아웃 버튼 클릭 이벤트 처리 함수     //
     const onSignOutButtonClickHandler = () => {
       resetLoginUser();
+      setCookie('accessToken', '', { path: MAIN_PATH(), expires: new Date() });
       navigate(MAIN_PATH());
     };
 
@@ -162,7 +163,7 @@ export default function Header() {
     //      event handler : 글쓰기 버튼 클릭 이벤트 처리 함수     //
     const onUploadButtonClickHandler = () => {
 
-    }
+    };
 
     //          render : 글쓰기 버튼 컴포넌트 렌더링             //
     if (title && content)
@@ -170,11 +171,11 @@ export default function Header() {
 
     //          render : 글쓰기 비활성화 버튼 컴포넌트 렌더링             //
     return <div className='disable-button'>{'글쓰기'}</div>
-  }
+  };
+
 
   //          effect : path가 변경될 때마다 실행될 함수            //
   useEffect(() => {
-
     const isAuthPage = pathname.startsWith(AUTH_PATH());
     setAuthPage(isAuthPage);
     const isMainPage = pathname === MAIN_PATH();
@@ -189,8 +190,13 @@ export default function Header() {
     setBoardUpdatePage(isBoardUpdatePage);
     const isUserPage = pathname.startsWith(USER_PATH(''));
     setUserPage(isUserPage);
-
   }, [pathname]);
+
+  //          effect : login user가 변경될 때마다 실행될 함수            //
+  useEffect(() => {
+    setLogin(loginUser !== null);
+  }, [loginUser]);
+
 
   //          render : Header 레이아웃 렌더링             //
   return (
