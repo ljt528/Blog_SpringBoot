@@ -48,4 +48,9 @@ public class BoardEntity {
         this.viewCount = 0;
         this.writerEmail = email;
     }
+
+    // 조회수 증가
+    public void increaseViewCount() {
+        this.viewCount++;
+    }
 }

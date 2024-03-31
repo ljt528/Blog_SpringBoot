@@ -8,12 +8,14 @@ import org.springframework.stereotype.Service;
 
 import com.ljt528.boardback.dto.request.board.PostBoardRequestDto;
 import com.ljt528.boardback.dto.response.ResponseDto;
+import com.ljt528.boardback.dto.response.board.GetBoardResponseDto;
 import com.ljt528.boardback.dto.response.board.PostBoardResponseDto;
 import com.ljt528.boardback.entity.BoardEntity;
 import com.ljt528.boardback.entity.ImageEntity;
 import com.ljt528.boardback.repository.BoardRepository;
 import com.ljt528.boardback.repository.ImageRepository;
 import com.ljt528.boardback.repository.UserRepository;
+import com.ljt528.boardback.repository.resultSet.GetBoardResultSet;
 import com.ljt528.boardback.service.BoardService;
 
 import lombok.RequiredArgsConstructor;
@@ -25,6 +27,31 @@ public class BoardServiceImplement implements BoardService {
     private final BoardRepository boardRepository;
     private final ImageRepository imageRepository;
     private final UserRepository userRepository;
+
+    @Override
+    public ResponseEntity<? super GetBoardResponseDto> getBoard(Integer boardNumber) {
+        
+        GetBoardResultSet resultSet = null;
+        List<ImageEntity> imageEntities = new ArrayList<>();
+        
+        try {
+
+            resultSet = boardRepository.getBoard(boardNumber);
+            if (resultSet == null) return GetBoardResponseDto.noExistBoard();
+
+            imageEntities = imageRepository.findByBoardNumber(boardNumber);
+
+            BoardEntity boardEntity = boardRepository.findByBoardNumber(boardNumber);
+            boardEntity.increaseViewCount();
+            boardRepository.save(boardEntity);
+            
+        } catch (Exception exception) {
+            exception.printStackTrace();
+            return ResponseDto.databaseError();
+        }
+        return GetBoardResponseDto.success(resultSet, imageEntities);
+
+    }
     
     @Override
     public ResponseEntity<? super PostBoardResponseDto> postBoard(PostBoardRequestDto dto, String email) {
