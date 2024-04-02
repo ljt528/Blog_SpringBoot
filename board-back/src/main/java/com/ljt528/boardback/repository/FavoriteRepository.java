@@ -9,4 +9,6 @@ import com.ljt528.boardback.entity.primaryKey.FavoritePk;
 @Repository
 public interface FavoriteRepository extends JpaRepository<FavoriteEntity, FavoritePk>{
     
+    FavoriteEntity findByBoardNumberAndUserEmail(Integer boardNumeber, String userEmail);
+
 }

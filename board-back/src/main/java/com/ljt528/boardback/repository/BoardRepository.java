@@ -10,6 +10,8 @@ import com.ljt528.boardback.repository.resultSet.GetBoardResultSet;
 @Repository
 public interface BoardRepository extends JpaRepository<BoardEntity, Integer>{
 
+    boolean existsByBoardNumber(Integer boardNumber);
+
     BoardEntity findByBoardNumber(Integer boardNumber);
     
     // 반드시 한 칸씩 띄워줘야 함
