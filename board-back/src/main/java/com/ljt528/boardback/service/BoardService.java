@@ -7,6 +7,7 @@ import com.ljt528.boardback.dto.request.board.PostCommentRequestDto;
 import com.ljt528.boardback.dto.response.board.GetBoardResponseDto;
 import com.ljt528.boardback.dto.response.board.GetCommentListResponseDto;
 import com.ljt528.boardback.dto.response.board.GetFavoriteListResponseDto;
+import com.ljt528.boardback.dto.response.board.IncreaseViewCountResponseDto;
 import com.ljt528.boardback.dto.response.board.PostBoardResponseDto;
 import com.ljt528.boardback.dto.response.board.PostCommentResponseDto;
 import com.ljt528.boardback.dto.response.board.PutFavoriteResponseDto;
@@ -22,4 +23,5 @@ public interface BoardService {
     
     ResponseEntity<? super PutFavoriteResponseDto> putFavorite(Integer boardNumber, String email);
 
+    ResponseEntity<? super IncreaseViewCountResponseDto> increaseViewCount(Integer boardNumber);
 }
