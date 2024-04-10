@@ -2,7 +2,6 @@ import { ChangeEvent, useEffect, useRef, useState } from 'react';
 import './style.css';
 import FavoriteItem from 'components/FavoriteItem';
 import { Board, CommentListItem, FavoriteListItem } from 'types/interface';
-import { commentListMock, favoriteListMock } from 'mocks';
 import CommentItem from 'components/CommentItem';
 import Pagination from 'components/Pagination';
 
@@ -10,12 +9,14 @@ import defaultProfileImage from 'assets/image/default-profile-image.png';
 import { useLoginUserStore } from 'stores';
 import { useNavigate, useParams } from 'react-router-dom';
 import { BOARD_PATH, BOARD_UPDATE_PATH, MAIN_PATH, USER_PATH } from 'constant';
-import { getBoardRequest, getCommentListRequest, getFavoriteListRequest, increaseViewCountRequest } from 'apis';
+import { deleteBoardRequest, getBoardRequest, getCommentListRequest, getFavoriteListRequest, increaseViewCountRequest, postCommentRequest, putFavoriteRequest } from 'apis';
 import GetBoardResponseDto from 'apis/response/board/get.board.response.dto';
 import { ResponseDto } from 'apis/response';
-import { GetCommentListResponseDto, GetFavoriteListResponseDto, IncreaseViewCountResponseDto } from 'apis/response/board';
+import { DeleteBoardResponseDto, GetCommentListResponseDto, GetFavoriteListResponseDto, IncreaseViewCountResponseDto, PostCommentResponseDto, PutFavoriteResponseDto } from 'apis/response/board';
 
 import dayjs from 'dayjs';
+import { useCookies } from 'react-cookie';
+import { PostCommentRequestDto } from 'apis/request/board';
 
 //          component : 게시물 상세 화면 컴포넌트            //
 export default function BoardDetail() {
@@ -25,6 +26,9 @@ export default function BoardDetail() {
 
   //          state : 로그인 유저 상태            //
   const { loginUser } = useLoginUserStore();
+
+  //          state : 쿠키 상태            //
+  const [cookies, setCookies] = useCookies();
 
 
   //          function : 네비게이트 함수            //
@@ -51,14 +55,13 @@ export default function BoardDetail() {
     //        state : more 버튼 상태        //
     const [showMore, setShowMore] = useState<boolean>(false);
 
+
     //        function : 작성일 포맷 변경 함수        //
     const getWriteDatetimeFormat = () => {
       if (!board) return '';
       const date = dayjs(board.writeDatetime);
       return date.format('YYYY. MM. DD.');
     };
-
-
 
     //        function : get board response 처리 함수        //
     const getBoardResponse = (responseBody: GetBoardResponseDto | ResponseDto | null) => {
@@ -79,6 +82,21 @@ export default function BoardDetail() {
       }
       const isWriter = loginUser?.email === board.writerEmail;
       setWriter(isWriter);
+    };
+
+    //        function : get board response 처리 함수        //
+    const deleteBoardResponse = (responseBody: DeleteBoardResponseDto | ResponseDto | null) => {
+      if (!responseBody) return;
+      const { code } = responseBody;
+      if(code === 'VF') alert('잘못된 접근입니다.');
+      if(code === 'NU') alert('존재하지 않는 유저입니다.');
+      if(code === 'NB') alert('존재하지 않는 게시물입니다.');
+      if(code === 'AF') alert('인증에 실패했습니다.');
+      if(code === 'NP') alert('권한이 없습니다.');
+      if(code === 'DBE') alert('데이터베이스 오류입니다.');
+      if(code !== 'SU') return;
+
+      navigator(MAIN_PATH());
     };
 
 
@@ -102,10 +120,10 @@ export default function BoardDetail() {
 
     //        event handler : 삭제 버튼 클릭 이벤트 처리        //
     const onDeleteButtonClickHandler = () => {
-      if (!board || !loginUser) return;
+      if (!boardNumber || !board || !loginUser || !cookies.accessToken) return;
       if (loginUser.email !== board.writerEmail) return;
-      // TODO : Delete Request
-      navigator(MAIN_PATH());
+      
+      deleteBoardRequest(boardNumber, cookies.accessToken).then(deleteBoardResponse);
     };
 
 
@@ -211,10 +229,44 @@ export default function BoardDetail() {
       setCommentList(commentList);
     };
 
+    //          function : put favorite response 처리 함수            //
+    const putFavoriteResponse = (responseBody: PutFavoriteResponseDto | ResponseDto | null) => {
+      if(!responseBody) return;
+      const { code } = responseBody;
+      if(code === 'VF') alert('잘못된 접근입니다.');
+      if(code === 'NU') alert('존재하지 않는 유저입니다.');
+      if(code === 'NB') alert('존재하지 않는 게시물입니다.');
+      if(code === 'AF') alert('인증에 실패했습니다.');
+      if(code === 'DBE') alert('데이터베이스 오류입니다.');
+      if(code !== 'SU') return;
+
+      if (!boardNumber) return;
+      getFavoriteListRequest(boardNumber).then(getFavoriteListResponse);
+    };
+
+    //          function : post comment response 처리 함수            //
+    const postCommentResponse = (responseBody: PostCommentResponseDto | ResponseDto | null) => {
+      if(!responseBody) return;
+      const { code } = responseBody;
+      if(code === 'VF') alert('잘못된 접근입니다.');
+      if(code === 'NU') alert('존재하지 않는 유저입니다.');
+      if(code === 'NB') alert('존재하지 않는 게시물입니다.');
+      if(code === 'AF') alert('인증에 실패했습니다.');
+      if(code === 'DBE') alert('데이터베이스 오류입니다.');
+      if(code !== 'SU') return;
+
+      // 댓글 달기 이후 댓글창 초기화
+      setComment('');
+
+      if (!boardNumber) return;
+      getCommentListRequest(boardNumber).then(getCommentListResponse);
+    };
+
 
     //          event handler : 좋아요 클릭 이벤트 처리            //
     const onFavoriteClickHandler = () => {
-      setFavorite(!isFavorite);
+      if (!boardNumber || !loginUser || !cookies.accessToken) return;
+      putFavoriteRequest(boardNumber, cookies.accessToken).then(putFavoriteResponse);
     };
 
     //          event handler : 좋아요 상자 보기 클릭 이벤트 처리            //
@@ -230,8 +282,10 @@ export default function BoardDetail() {
     //          event handler : 댓글 작성 버튼 클릭 이벤트 처리            //
     const onCommentSubmitButtonClickHandler = () => {
       // 내용이 없으면 클릭되지 않는 기능
-      if (!comment) return;
-      alert('!!');
+      if (!comment || !boardNumber || !loginUser || !cookies.accessToken) return;
+
+      const requestBody: PostCommentRequestDto = { content: comment };
+      postCommentRequest(boardNumber, requestBody, cookies.accessToken).then(postCommentResponse);
     };
 
     //          event handler : 댓글 변경 이벤트 처리            //
