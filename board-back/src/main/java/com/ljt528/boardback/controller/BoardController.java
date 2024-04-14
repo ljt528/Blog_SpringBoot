@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ljt528.boardback.dto.request.board.PatchBoardRequestDto;
 import com.ljt528.boardback.dto.request.board.PostBoardRequestDto;
 import com.ljt528.boardback.dto.request.board.PostCommentRequestDto;
 import com.ljt528.boardback.dto.response.board.DeleteBoardResponseDto;
@@ -19,6 +20,7 @@ import com.ljt528.boardback.dto.response.board.GetBoardResponseDto;
 import com.ljt528.boardback.dto.response.board.GetCommentListResponseDto;
 import com.ljt528.boardback.dto.response.board.GetFavoriteListResponseDto;
 import com.ljt528.boardback.dto.response.board.IncreaseViewCountResponseDto;
+import com.ljt528.boardback.dto.response.board.PatchBoardResponseDto;
 import com.ljt528.boardback.dto.response.board.PostBoardResponseDto;
 import com.ljt528.boardback.dto.response.board.PostCommentResponseDto;
 import com.ljt528.boardback.dto.response.board.PutFavoriteResponseDto;
@@ -91,6 +93,16 @@ public class BoardController {
         @AuthenticationPrincipal String email
     ) {
         ResponseEntity<? super PutFavoriteResponseDto> response = boardService.putFavorite(boardNumber, email);
+        return response;
+    }
+
+    @PatchMapping("/{boardNumber}")
+    public ResponseEntity<? super PatchBoardResponseDto> patchBoard(
+        @RequestBody @Valid PatchBoardRequestDto requestBody,
+        @PathVariable("boardNumber") Integer boardNumber,
+        @AuthenticationPrincipal String email
+    ) {
+        ResponseEntity<? super PatchBoardResponseDto> response = boardService.patchBoard(requestBody, boardNumber, email);
         return response;
     }
 
