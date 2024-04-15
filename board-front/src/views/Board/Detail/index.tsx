@@ -85,7 +85,7 @@ export default function BoardDetail() {
       setWriter(isWriter);
     };
 
-    //        function : get board response 처리 함수        //
+    //        function : delete board response 처리 함수        //
     const deleteBoardResponse = (responseBody: DeleteBoardResponseDto | ResponseDto | null) => {
       if (!responseBody) return;
       const { code } = responseBody;
