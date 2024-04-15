@@ -19,6 +19,7 @@ import com.ljt528.boardback.dto.response.board.DeleteBoardResponseDto;
 import com.ljt528.boardback.dto.response.board.GetBoardResponseDto;
 import com.ljt528.boardback.dto.response.board.GetCommentListResponseDto;
 import com.ljt528.boardback.dto.response.board.GetFavoriteListResponseDto;
+import com.ljt528.boardback.dto.response.board.GetLatestBoardListResponseDto;
 import com.ljt528.boardback.dto.response.board.IncreaseViewCountResponseDto;
 import com.ljt528.boardback.dto.response.board.PatchBoardResponseDto;
 import com.ljt528.boardback.dto.response.board.PostBoardResponseDto;
@@ -65,6 +66,12 @@ public class BoardController {
         @PathVariable("boardNumber") Integer boardNumber
     ) {
         ResponseEntity<? super IncreaseViewCountResponseDto> response = boardService.increaseViewCount(boardNumber);
+        return response;
+    }
+
+    @GetMapping("/latest-list")
+    public ResponseEntity<? super GetLatestBoardListResponseDto> getLatestBoardList() {
+        ResponseEntity<? super GetLatestBoardListResponseDto> response = boardService.getLatestBoardList();
         return response;
     }
 
