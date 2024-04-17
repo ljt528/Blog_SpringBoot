@@ -75,7 +75,7 @@ export default function Main() {
       if (!responseBody) return;
       const { code } = responseBody;
       if (code === 'DBE') alert('데이터베이스 오류입니다.');
-      if (code === 'SU') return;
+      if (code !== 'SU') return;
 
       const { latestList } = responseBody as GetLatestBoardListResponseDto;
       setTotalList(latestList);
@@ -86,7 +86,7 @@ export default function Main() {
       if (!responseBody) return;
       const { code } = responseBody;
       if (code === 'DBE') alert('데이터베이스 오류입니다.');
-      if (code === 'SU') return;
+      if (code !== 'SU') return;
 
       const { popularWordList } = responseBody as GetPopularListResponseDto;
       setPopularWordList(popularWordList);
