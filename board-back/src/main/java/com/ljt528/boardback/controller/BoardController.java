@@ -20,6 +20,7 @@ import com.ljt528.boardback.dto.response.board.GetBoardResponseDto;
 import com.ljt528.boardback.dto.response.board.GetCommentListResponseDto;
 import com.ljt528.boardback.dto.response.board.GetFavoriteListResponseDto;
 import com.ljt528.boardback.dto.response.board.GetLatestBoardListResponseDto;
+import com.ljt528.boardback.dto.response.board.GetSearchBoardListResponseDto;
 import com.ljt528.boardback.dto.response.board.GetTop3BoardListResponseDto;
 import com.ljt528.boardback.dto.response.board.IncreaseViewCountResponseDto;
 import com.ljt528.boardback.dto.response.board.PatchBoardResponseDto;
@@ -79,6 +80,17 @@ public class BoardController {
     @GetMapping("/top-3")
     public ResponseEntity<? super GetTop3BoardListResponseDto> getTop3BoardList() {
         ResponseEntity<? super GetTop3BoardListResponseDto> response = boardService.getTop3BoardList();
+        return response;
+    }
+
+    @GetMapping(value = {"/sear-list/{searchWord}", "/search-list/{searchWord}/{preSearchWord}"})
+    public ResponseEntity<? super GetSearchBoardListResponseDto> getSearchBoardList(
+        @PathVariable("searchWord") String searchWord,
+        // 필수가 아니므로 false로 지정
+        @PathVariable(value = "preSearchWord", required = false) String preSearchWord
+    ) {
+        // preSearchWord는 필수가 아니므로 값이 없으면 null로 들어감
+        ResponseEntity<? super GetSearchBoardListResponseDto> response = boardService.getSearchBoardList(searchWord, preSearchWord);
         return response;
     }
 
