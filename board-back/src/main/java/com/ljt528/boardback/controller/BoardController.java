@@ -83,7 +83,8 @@ public class BoardController {
         return response;
     }
 
-    @GetMapping(value = {"/sear-list/{searchWord}", "/search-list/{searchWord}/{preSearchWord}"})
+    // 엔드포인트 2개를 하나의 메소드로 처리
+    @GetMapping(value = {"/search-list/{searchWord}", "/search-list/{searchWord}/{preSearchWord}"})
     public ResponseEntity<? super GetSearchBoardListResponseDto> getSearchBoardList(
         @PathVariable("searchWord") String searchWord,
         // 필수가 아니므로 false로 지정

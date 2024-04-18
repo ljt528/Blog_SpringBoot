@@ -14,7 +14,7 @@ import com.ljt528.boardback.entity.BoardListViewEntity;
 import lombok.Getter;
 
 @Getter
-public class GetSearchBoardListResponseDto extends ResponseDto{
+public class GetSearchBoardListResponseDto extends ResponseDto {
     
     private List<BoardListItem> searchList;
 

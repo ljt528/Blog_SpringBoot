@@ -12,7 +12,7 @@ public interface BoardListViewRepository extends JpaRepository<BoardListViewEnti
     
     List<BoardListViewEntity> findByOrderByWriteDatetimeDesc();
     List<BoardListViewEntity> findTop3ByWriteDatetimeGreaterThanOrderByFavoriteCountDescCommentCountDescViewCountDescWriteDatetimeDesc(String writeDatetime);
-    // Contains는 Like와 같은 기능이라고 생각(포함하는지 판별하는 기능)
+    // Contains는 Like와 같은 기능이라고 생각(특정 단어 포함하는지 판별하는 기능)
     List<BoardListViewEntity> findByTitleContainsOrContentContainsOrderByWriteDatetimeDesc(String title, String content);
 
 }

@@ -166,7 +166,7 @@ public class BoardServiceImplement implements BoardService {
 
             boardListViewEntities = boardListViewRepository.findByTitleContainsOrContentContainsOrderByWriteDatetimeDesc(searchWord, searchWord);
             
-            // 위와 아래의 searchLogEntity는 각자 다른 것이다.
+            // 위와 아래의 searchLogEntity는 각자 다른 것이다. 인스턴스가 다르기 때문에
             SearchLogEntity searchLogEntity = new SearchLogEntity(searchWord, preSearchWord, false);
             searchLogRepository.save(searchLogEntity);
 
