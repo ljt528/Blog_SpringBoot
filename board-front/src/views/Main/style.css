@@ -104,7 +104,7 @@
     background-color: rgba(255, 255, 255, 1);
 }
 
-.main-bottom--popular-card-container {
+.main-bottom-popular-card-container {
     display: flex;
     flex-direction: column;
     gap: 24px;
