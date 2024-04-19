@@ -22,6 +22,7 @@ import com.ljt528.boardback.dto.response.board.GetFavoriteListResponseDto;
 import com.ljt528.boardback.dto.response.board.GetLatestBoardListResponseDto;
 import com.ljt528.boardback.dto.response.board.GetSearchBoardListResponseDto;
 import com.ljt528.boardback.dto.response.board.GetTop3BoardListResponseDto;
+import com.ljt528.boardback.dto.response.board.GetUserBoardListResponseDto;
 import com.ljt528.boardback.dto.response.board.IncreaseViewCountResponseDto;
 import com.ljt528.boardback.dto.response.board.PatchBoardResponseDto;
 import com.ljt528.boardback.dto.response.board.PostBoardResponseDto;
@@ -92,6 +93,14 @@ public class BoardController {
     ) {
         // preSearchWord는 필수가 아니므로 값이 없으면 null로 들어감
         ResponseEntity<? super GetSearchBoardListResponseDto> response = boardService.getSearchBoardList(searchWord, preSearchWord);
+        return response;
+    }
+    
+    @GetMapping("/user-board-list/{email}")
+    public ResponseEntity<? super GetUserBoardListResponseDto> getUserBoardList(
+        @PathVariable("email") String email
+    ) {
+        ResponseEntity<? super GetUserBoardListResponseDto> response = boardService.getUserBoardList(email);
         return response;
     }
 
