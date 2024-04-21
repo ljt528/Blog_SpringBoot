@@ -93,7 +93,8 @@ public class UserServiceImplement implements UserService {
             if (userEntity == null) return PatchProfileImageResponseDto.noExistUser();
 
             String profileImage = dto.getProfileImage();
-            userEntity.setProfileImage(profileImage);;
+            
+            userEntity.setProfileImage(profileImage);
             userRepository.save(userEntity);
 
         } catch (Exception exception) {

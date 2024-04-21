@@ -36,7 +36,7 @@ public class UserController {
         return response;
     }
 
-    @GetMapping("/")
+    @GetMapping("")
     public ResponseEntity<? super GetSignInUserResponseDto> getSignInUser(
         // JwtAuthenticationFilter에서 꺼내올 수 있음
         @AuthenticationPrincipal String email

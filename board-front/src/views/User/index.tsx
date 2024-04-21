@@ -3,7 +3,6 @@ import './style.css';
 import defaultProfileImage from 'assets/image/default-profile-image.png';
 import { useNavigate, useParams } from 'react-router-dom';
 import { BoardListItem } from 'types/interface';
-import { latestBoardListMock } from 'mocks';
 import BoardItem from 'components/BoardItem';
 import { BOARD_PATH, BOARD_WRITE_PATH, MAIN_PATH, USER_PATH } from 'constant';
 import { useLoginUserStore } from 'stores';
@@ -155,7 +154,7 @@ export default function User() {
 
 
     //        render : 유저 화면 상단 컴포넌트 렌더링        //
-    return (
+    return(
       <div id='user-top-wrapper'>
         <div className='user-top-container'>
           {isMyPage ?
@@ -166,9 +165,9 @@ export default function User() {
                 <div className='icon image-box-white-icon'></div>
               </div>
             }
-            <input ref={imageInputRef} type="file" accept='image/*' style={{ display: 'none' }} onChange={onProfileImageChangeHandler} />
+            <input ref={imageInputRef} type='file' accept='image/*' style={{ display: 'none' }} onChange={onProfileImageChangeHandler} />
           </div> :
-          <div className='user-top-profile-image-box' style={{ backgroundImage: `url(${profileImage ? profileImage : defaultProfileImage})` }}></div>
+          <div className='user-top- profile-image-box' style={{ backgroundImage: `url(${profileImage ? profileImage : defaultProfileImage})` }}></div>
           }
           <div className='user-top-info-box'>
             <div className='user-top-info-nickname-box'>
@@ -185,7 +184,7 @@ export default function User() {
               <div className='user-top-info-nickname'>{nickname}</div>
               }
             </div>
-            <div className='user-top-info-email'>{'email3@email3.com'}</div>
+            <div className='user-top-info-email'>{'email@email.com'}</div>
           </div>
         </div>
       </div>
@@ -240,7 +239,7 @@ export default function User() {
         <div className='user-bottom-container'>
           <div className='user-bottom-title'>{isMyPage ? '내 게시물 ' : '게시물 '}<span className='emphasis'>{count}</span></div>
           <div className='user-bottom-contents-box'>
-            { count === 0 ?
+            {count === 0 ?
             <div className='user-bottom-contents-nothing'>{'게시물이 없습니다.'}</div> :
             <div className='user-bottom-contents'>
               {viewList.map(boardListItem => <BoardItem boardListItem={boardListItem} />)}

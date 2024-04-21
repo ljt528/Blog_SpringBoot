@@ -11,7 +11,7 @@ import com.ljt528.boardback.entity.UserEntity;
 import lombok.Getter;
 
 @Getter
-public class GetUserResponseDto extends ResponseDto{
+public class GetUserResponseDto extends ResponseDto {
     
     private String email;
     private String nickname;
