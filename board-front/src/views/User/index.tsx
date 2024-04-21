@@ -28,7 +28,7 @@ export default function User() {
   const [cookies, setCookie] = useCookies();
 
   //        state : 마이페이지 여부 상태        //
-  const [isMyPage, setMyPage] = useState<boolean>(true);
+  const [isMyPage, setMyPage] = useState<boolean>(false);
 
   //        function : 네비게이트 함수        //
   const navigate = useNavigate();
