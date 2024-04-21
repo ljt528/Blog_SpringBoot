@@ -167,7 +167,7 @@ export default function User() {
             }
             <input ref={imageInputRef} type='file' accept='image/*' style={{ display: 'none' }} onChange={onProfileImageChangeHandler} />
           </div> :
-          <div className='user-top- profile-image-box' style={{ backgroundImage: `url(${profileImage ? profileImage : defaultProfileImage})` }}></div>
+          <div className='user-top-profile-image-box' style={{ backgroundImage: `url(${profileImage ? profileImage : defaultProfileImage})` }}></div>
           }
           <div className='user-top-info-box'>
             <div className='user-top-info-nickname-box'>
@@ -184,7 +184,7 @@ export default function User() {
               <div className='user-top-info-nickname'>{nickname}</div>
               }
             </div>
-            <div className='user-top-info-email'>{'email@email.com'}</div>
+            <div className='user-top-info-email'>{userEmail}</div>
           </div>
         </div>
       </div>
